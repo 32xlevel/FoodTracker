@@ -3,8 +3,8 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-            android:id="@+id/action_add_word"
-            android:icon="@android:drawable/btn_dialog"
+            android:id="@+id/menu_settings"
+            android:icon="@android:drawable/ic_menu_preferences"
             android:orderInCategory="1"
             android:title="@string/menu_settings"
             app:showAsAction="ifRoom" />
