@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalTime
 
-@Entity
+@Entity(tableName = "users")
 class User(@PrimaryKey(autoGenerate = true) @NonNull var id: Int?,
            @NonNull var name: String?,
            @NonNull var gender: String?,
