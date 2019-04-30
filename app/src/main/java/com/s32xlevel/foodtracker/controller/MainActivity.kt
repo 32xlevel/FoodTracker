@@ -2,6 +2,7 @@ package com.s32xlevel.foodtracker.controller
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import com.s32xlevel.foodtracker.R
 import com.s32xlevel.foodtracker.util.App
@@ -14,10 +15,21 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (userRepository!!.findAll().isEmpty()) {
             changeFragment(SettingsFragment(), false)
         } else {
             changeFragment(FoodFragment(), false)
+        }
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.action_food -> changeFragment(FoodFragment(), true)
+                R.id.action_water -> changeFragment(WaterFragment(), true)
+                R.id.action_help -> changeFragment(HelpFragment(), true)
+            }
+            true
         }
     }
 

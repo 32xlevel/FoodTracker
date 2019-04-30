@@ -7,5 +7,12 @@
         android:orientation="vertical"
         tools:context=".controller.HelpFragment">
 
+    <include
+            layout="@layout/toolbar_top"
+            android:id="@+id/toolbar"/>
+
+    <include
+        layout="@layout/bottom_nav"
+        android:id="@+id/toolbar_bottom"/>
 
 </LinearLayout>
