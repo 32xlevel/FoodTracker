@@ -2,22 +2,27 @@ package com.s32xlevel.foodtracker.controller
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import com.s32xlevel.foodtracker.R
+import com.s32xlevel.foodtracker.util.App
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ChangeFragment {
 
+    private val db = App.getInstance().database
+    private val userRepository = db?.userRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        if (userRepository!!.findAll().isEmpty()) {
+            changeFragment(SettingsFragment(), false)
+        } else {
+            changeFragment(FoodFragment(), false)
+        }
     }
 
     override fun changeToSettings() {
-        val fragment = SettingsFragment()
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(frag_container.id, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        changeFragment(SettingsFragment(), true)
     }
 
     // https://stackoverflow.com/questions/13086840/actionbar-up-navigation-with-fragments/40342939#40342939
@@ -34,5 +39,13 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
         super.onSupportNavigateUp()
         onBackPressed()
         return true
+    }
+
+    private fun changeFragment(fragment: Fragment, isAddToBackStack: Boolean) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(frag_container.id, fragment)
+        if (isAddToBackStack)
+            transaction.addToBackStack(null)
+        transaction.commit()
     }
 }
