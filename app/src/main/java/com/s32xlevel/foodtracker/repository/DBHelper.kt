@@ -1,10 +1,13 @@
-package com.s32xlevel.foodtracker.util
+package com.s32xlevel.foodtracker.repository
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import org.jetbrains.anko.db.*
 
-class DBHelper(context: Context) : ManagedSQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
+class DBHelper(context: Context) : ManagedSQLiteOpenHelper(context,
+    DB_NAME, null,
+    DB_VERSION
+) {
 
     init {
         instanse = this
@@ -14,7 +17,8 @@ class DBHelper(context: Context) : ManagedSQLiteOpenHelper(context, DB_NAME, nul
         private var instanse: DBHelper? = null
 
         @Synchronized
-        fun getInstance(context: Context) = instanse ?: DBHelper(context.applicationContext)
+        fun getInstance(context: Context) = instanse
+            ?: DBHelper(context.applicationContext)
 
         const val DB_NAME = "tracker.db"
         const val DB_VERSION = 1
@@ -60,12 +64,16 @@ class DBHelper(context: Context) : ManagedSQLiteOpenHelper(context, DB_NAME, nul
             UserTable.RATE_WATER to INTEGER + NOT_NULL
         )
 
-        db.createTable(WaterTable.TABLE_NAME, true,
+        db.createTable(
+            WaterTable.TABLE_NAME, true,
             WaterTable.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
             WaterTable.DATE_TIME to TEXT + NOT_NULL,
             WaterTable.volume to INTEGER + NOT_NULL,
             WaterTable.USER_ID to INTEGER + NOT_NULL,
-            FOREIGN_KEY(WaterTable.USER_ID, UserTable.TABLE_NAME, UserTable.ID, ON_DELETE(ConstraintActions.CASCADE)))
+            FOREIGN_KEY(
+                WaterTable.USER_ID,
+                UserTable.TABLE_NAME,
+                UserTable.ID, ON_DELETE(ConstraintActions.CASCADE)))
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

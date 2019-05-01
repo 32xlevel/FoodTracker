@@ -9,5 +9,5 @@ interface UserRepository {
 
     fun save(user: User)
 
-    fun delete(user: User)
+    fun delete(id: Int)
 }

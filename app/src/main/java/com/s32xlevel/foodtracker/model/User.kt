@@ -1,5 +1,6 @@
 package com.s32xlevel.foodtracker.model
 
+import java.sql.Time
 import java.time.LocalTime
 
 class User(var id: Int?,
@@ -9,5 +10,5 @@ class User(var id: Int?,
            var height: Int?,
            var rateWater: Int?,
            var foodNumber: Byte?,
-           var startDayTime: LocalTime?,
-           var endDayTime: LocalTime?)
+           var startDayTime: Time?,
+           var endDayTime: Time?)
