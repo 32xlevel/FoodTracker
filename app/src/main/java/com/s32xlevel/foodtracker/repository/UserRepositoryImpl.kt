@@ -1,6 +1,7 @@
 package com.s32xlevel.foodtracker.repository
 
 import android.content.Context
+import android.database.sqlite.SQLiteException
 import com.s32xlevel.foodtracker.model.User
 import org.jetbrains.anko.db.*
 import java.sql.Time
@@ -15,7 +16,11 @@ class UserRepositoryImpl(private val context: Context): UserRepository {
     }
 
     override fun findById(id: Int): User? = context.database.use {
-        select(DBHelper.UserTable.TABLE_NAME).whereSimple("id = $id").exec { parseOpt(classParser()) }
+        try {
+            select(DBHelper.UserTable.TABLE_NAME).whereSimple("id = $id").exec { parseOpt(classParser()) }
+        } catch (e: SQLiteException) {
+            null
+        }
     }
 
     override fun delete(id: Int): Unit = context.database.use {

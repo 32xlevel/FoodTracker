@@ -4,26 +4,28 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.view.View
 import com.s32xlevel.foodtracker.R
-import com.s32xlevel.foodtracker.util.App
+import com.s32xlevel.foodtracker.repository.UserRepository
+import com.s32xlevel.foodtracker.repository.UserRepositoryImpl
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ChangeFragment {
-
-    private val db = App.getInstance().database
-    private val userRepository = db?.userRepository
+    private var userRepository: UserRepository? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        userRepository = UserRepositoryImpl(this)
 
-        if (userRepository!!.findAll().isEmpty()) {
-            changeFragment(SettingsFragment(), false)
+        if (userRepository!!.findById(1) == null) {
+            bottom_navigation.visibility = View.INVISIBLE
+            changeFragment(SettingsFragment() as Fragment, false)
         } else {
-            changeFragment(FoodFragment(), false)
+            changeFragment(FoodFragment() as Fragment, false)
         }
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigationView.setOnNavigationItemSelectedListener {
+        bottom_navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.action_food -> changeFragment(FoodFragment(), true)
                 R.id.action_water -> changeFragment(WaterFragment(), true)
