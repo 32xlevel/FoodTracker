@@ -1,12 +1,12 @@
 package com.s32xlevel.foodtracker.repository
 
 import com.s32xlevel.foodtracker.model.Water
-import java.time.LocalDateTime
+import java.sql.Date
 
 interface WaterRepository {
-    fun findAllByDateTime(userId: Int, dateTime: LocalDateTime): List<Water>
+    fun findAllByDateTime(userId: Int, dateTime: Date): List<Water>
 
     fun create(water: Water, userId: Int)
 
-    fun delete(water: Water, userId: Int)
+    fun delete(id: Int, userId: Int)
 }

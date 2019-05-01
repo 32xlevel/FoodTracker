@@ -1,8 +1,8 @@
 package com.s32xlevel.foodtracker.model
 
-import java.time.LocalDateTime
+import java.sql.Date
 
 class Water(var id: Int?,
-            var dateTime: LocalDateTime?,
+            var dateTime: Date?,
             var volume: Int?,
             var userId: Int?)
