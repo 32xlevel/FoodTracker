@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.*
 import com.s32xlevel.foodtracker.R
+import kotlinx.android.synthetic.main.fragment_water.*
+import java.text.DateFormatSymbols
+import java.util.*
 
 class WaterFragment : Fragment() {
 
@@ -22,6 +25,7 @@ class WaterFragment : Fragment() {
         val toolbar = rootView.findViewById<Toolbar>(R.id.toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         setHasOptionsMenu(true)
+        fillCurrentDate()
         return rootView
     }
 
@@ -34,5 +38,12 @@ class WaterFragment : Fragment() {
             R.id.menu_settings -> listenerChange!!.changeToSettings()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun fillCurrentDate() {
+        val calendar = Calendar.getInstance()
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val month = DateFormatSymbols().months[calendar.get(Calendar.MONTH) - 1]
+        current_date.text = "Сегодня $day $month"
     }
 }
