@@ -39,6 +39,8 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
         changeFragment(SettingsFragment(), true)
     }
 
+
+
     // https://stackoverflow.com/questions/13086840/actionbar-up-navigation-with-fragments/40342939#40342939
     override fun onBackPressed() {
         val count = supportFragmentManager.backStackEntryCount

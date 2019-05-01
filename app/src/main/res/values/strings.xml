@@ -7,4 +7,15 @@
     <string name="bottom_menu_food">Питание</string>
     <string name="bottom_menu_water">Вода</string>
     <string name="bottom_menu_help">Помощь</string>
+    <string name="good_day">Добрый день!</string>
+    <string name="settings_name">Представьтесь:</string>
+    <string name="setting_gender">Ваш пол:</string>
+    <string name="Male">М</string>
+    <string name="Female">Ж</string>
+    <string name="settings_weight">Ваш вес (в кг):</string>
+    <string name="settings_height">Ваш рост (в метрах)</string>
+    <string name="settings_food_count">Сколько раз в день вы планируете питаться? (4 или 5)</string>
+    <string name="settings_start_time">Время подъема:</string>
+    <string name="settings_end_time">Время ложиться:</string>
+    <string name="button_start_text">Начать работу</string>
 </resources>

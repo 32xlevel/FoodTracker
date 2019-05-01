@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -7,8 +7,156 @@
         android:orientation="vertical"
         tools:context=".controller.SettingsFragment">
 
-    <include
-            layout="@layout/toolbar_top"
-            android:id="@+id/toolbar"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</LinearLayout>
+        <include
+                layout="@layout/toolbar_top"
+                android:id="@+id/toolbar"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_margin="16dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/good_day"/>
+
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="@string/settings_name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+            <EditText
+                    android:id="@+id/fill_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:inputType="text"/>
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_margin="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_gender"/>
+
+            <RadioGroup
+                    android:layout_margin="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radio_group_gender"
+                    android:orientation="horizontal">
+
+                <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radio_button_male"
+                        android:checked="true"
+                        android:text="@string/Male"/>
+
+                <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radio_button_female"
+                        android:checked="false"
+                        android:text="@string/Female"/>
+
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="@string/settings_weight"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+            <EditText
+                    android:id="@+id/fill_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:inputType="number"/>
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="@string/settings_height"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+            <EditText
+                    android:id="@+id/fill_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:inputType="number"/>
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="@string/settings_start_time"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+            <EditText
+                    android:id="@+id/fill_start_date_time"
+                    android:layout_width="148dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"/>
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="@string/settings_end_time"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+            <EditText
+                    android:id="@+id/fill_end_date_time"
+                    android:layout_width="148dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"/>
+        </LinearLayout>
+
+        <LinearLayout android:orientation="vertical" android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/settings_food_count"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+            <EditText
+                    android:id="@+id/fill_food_count"
+                    android:layout_width="177dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:inputType="number"/>
+        </LinearLayout>
+
+        <Button
+                android:id="@+id/button_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</ScrollView>
