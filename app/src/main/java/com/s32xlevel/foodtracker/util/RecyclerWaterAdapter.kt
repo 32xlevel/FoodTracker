@@ -10,12 +10,11 @@ import com.s32xlevel.foodtracker.AuthorizedUser
 import com.s32xlevel.foodtracker.R
 import com.s32xlevel.foodtracker.repository.WaterRepository
 import com.s32xlevel.foodtracker.repository.WaterRepositoryImpl
-import kotlinx.android.synthetic.main.recycler_view_water.view.*
 import org.joda.time.DateTime
 
 class RecyclerWaterAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerWaterAdapter.ViewHolder>() {
     interface Listener {
-        fun onLongClick(id: Int?): Boolean
+        fun onLongClick(id: Int): Boolean
     }
 
     var listener: Listener? = null
@@ -43,7 +42,7 @@ class RecyclerWaterAdapter(private val context: Context) : RecyclerView.Adapter<
         viewHolder.sourceText.text = water.source
         viewHolder.volumeText.text = water.volume.toString()
 
-        viewHolder.itemView.setOnLongClickListener { listener?.onLongClick(water.id) ?: false }
+        viewHolder.itemView.setOnLongClickListener { listener?.onLongClick(water.id!!) ?: false }
     }
 
     override fun getItemCount(): Int {
