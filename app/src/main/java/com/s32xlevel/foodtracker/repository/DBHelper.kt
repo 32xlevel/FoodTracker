@@ -42,6 +42,7 @@ class DBHelper(context: Context) : ManagedSQLiteOpenHelper(context,
         const val ID = "_id"
         const val DATE_TIME = "date_time" // YYYY-MM-DD HH:mm
         const val volume = "volume"
+        const val source = "source"
         const val USER_ID = "user_id"
     }
 
@@ -69,6 +70,7 @@ class DBHelper(context: Context) : ManagedSQLiteOpenHelper(context,
             WaterTable.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
             WaterTable.DATE_TIME to TEXT + NOT_NULL,
             WaterTable.volume to INTEGER + NOT_NULL,
+            WaterTable.source to TEXT + NOT_NULL,
             WaterTable.USER_ID to INTEGER + NOT_NULL,
             FOREIGN_KEY(
                 WaterTable.USER_ID,

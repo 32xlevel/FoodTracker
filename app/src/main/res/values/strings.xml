@@ -13,10 +13,13 @@
     <string name="Male">М</string>
     <string name="Female">Ж</string>
     <string name="settings_weight">Ваш вес (в кг):</string>
-    <string name="settings_height">Ваш рост (в метрах)</string>
+    <string name="settings_height">Ваш рост (в cм)</string>
     <string name="settings_food_count">Сколько раз в день вы планируете питаться? (4 или 5)</string>
     <string name="settings_start_time">Время подъема:</string>
     <string name="settings_end_time">Время ложиться:</string>
     <string name="button_start_text">Начать работу</string>
     <string name="settings_validation">Заполните все поля!</string>
+    <string name="water_drink_today">Сегодня выпито:</string>
+    <string name="your_norma">Ваша норма:</string>
+    <string name="water_recycler_text">Ваши приемы за сегодня</string>
 </resources>
