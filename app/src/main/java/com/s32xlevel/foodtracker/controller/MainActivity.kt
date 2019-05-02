@@ -9,6 +9,7 @@ import com.s32xlevel.foodtracker.R
 import com.s32xlevel.foodtracker.repository.UserRepository
 import com.s32xlevel.foodtracker.repository.UserRepositoryImpl
 import kotlinx.android.synthetic.main.activity_main.*
+import net.danlew.android.joda.JodaTimeAndroid
 
 class MainActivity : AppCompatActivity(), ChangeFragment {
     private var userRepository: UserRepository? = null
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        JodaTimeAndroid.init(this)
         userRepository = UserRepositoryImpl(this)
 
         if (userRepository!!.findById(1) == null) {
