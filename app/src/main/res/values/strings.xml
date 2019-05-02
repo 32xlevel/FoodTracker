@@ -18,4 +18,5 @@
     <string name="settings_start_time">Время подъема:</string>
     <string name="settings_end_time">Время ложиться:</string>
     <string name="button_start_text">Начать работу</string>
+    <string name="settings_validation">Заполните все поля!</string>
 </resources>

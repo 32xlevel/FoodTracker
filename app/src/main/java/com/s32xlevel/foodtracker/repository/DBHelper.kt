@@ -61,7 +61,7 @@ class DBHelper(context: Context) : ManagedSQLiteOpenHelper(context,
             UserTable.FOOD_COUNT_DAY to INTEGER + NOT_NULL,
             UserTable.START_DAY_TIME to TEXT + NOT_NULL,
             UserTable.END_DAY_TIME to TEXT + NOT_NULL,
-            UserTable.RATE_WATER to INTEGER + NOT_NULL
+            UserTable.RATE_WATER to REAL + NOT_NULL
         )
 
         db.createTable(

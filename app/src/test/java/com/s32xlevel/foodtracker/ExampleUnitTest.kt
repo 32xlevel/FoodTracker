@@ -1,5 +1,6 @@
 package com.s32xlevel.foodtracker
 
+import com.s32xlevel.foodtracker.repository.UserRepositoryImpl
 import org.junit.Test
 
 import org.junit.Assert.*

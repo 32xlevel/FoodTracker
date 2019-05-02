@@ -4,6 +4,7 @@ package com.s32xlevel.foodtracker.controller
 import android.app.TimePickerDialog
 import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -11,11 +12,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.Toast
 import com.s32xlevel.foodtracker.AuthorizedUser
 import com.s32xlevel.foodtracker.R
 import com.s32xlevel.foodtracker.model.User
 import com.s32xlevel.foodtracker.repository.UserRepository
 import com.s32xlevel.foodtracker.repository.UserRepositoryImpl
+import com.s32xlevel.foodtracker.util.TimeUtil.Companion.convertTimeString
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import java.sql.Date
@@ -50,6 +53,7 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fillFields()
         timePickers()
         onClickButton()
     }
@@ -78,7 +82,7 @@ class SettingsFragment : Fragment() {
             val weight = fill_weight.text.toString().toInt()
             val height = fill_height.text.toString().toInt()
             val startTime = fill_start_date_time.text.toString()
-            val endTime = fill_start_date_time.text.toString()
+            val endTime = fill_end_date_time.text.toString()
             val foodCount = fill_food_count.text.toString().toByte()
             val rateWater = 0.03 * weight
 
@@ -89,24 +93,34 @@ class SettingsFragment : Fragment() {
             if (userRepository!!.findById(1) != null) {
                 user.id = AuthorizedUser.id
             }
-            userRepository!!.save(user)
 
-            if (bottom_navigation.visibility == View.INVISIBLE) {
-                bottom_navigation.visibility = View.VISIBLE
+            if (name.isBlank() || weight < 10 || height < 60 || startTime.isBlank() || endTime.isBlank() || foodCount < 4 || foodCount > 5) {
+                Toast.makeText(context!!, getString(R.string.settings_validation), Toast.LENGTH_SHORT).show()
+            } else {
+                bottomNavigationVisibility()
+                userRepository!!.save(user)
+                listenerChange!!.changeFromSetting()
             }
-
-            listenerChange!!.changeFromSetting()
         }
     }
 
-    private fun convertTimeString(s: String): String {
-        val split = s.split(":").toMutableList()
-        for (i in split.indices) {
-            if (split[i].toInt() < 10) {
-                split[i] = "0${split[i]}"
-            }
+    private fun bottomNavigationVisibility() {
+        val bottom = activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        if (bottom.visibility == View.INVISIBLE) {
+            bottom.visibility = View.VISIBLE
         }
-        split.add("00")
-        return "${split[0]}:${split[1]}:${split[2]}"
+    }
+
+    private fun fillFields() {
+        val user = userRepository!!.findById(1)
+        if (user != null) {
+            fill_name.setText(user.name)
+            fill_weight.setText(user.weight.toString())
+            fill_height.setText(user.height.toString())
+            fill_start_date_time.setText(user.startDayTime)
+            fill_end_date_time.setText(user.endDayTime)
+            fill_food_count.setText(user.foodNumber.toString())
+        }
     }
 }

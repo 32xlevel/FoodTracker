@@ -25,8 +25,12 @@ class WaterFragment : Fragment() {
         val toolbar = rootView.findViewById<Toolbar>(R.id.toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         setHasOptionsMenu(true)
-        fillCurrentDate()
         return rootView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fillCurrentDate()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -44,6 +48,6 @@ class WaterFragment : Fragment() {
         val calendar = Calendar.getInstance()
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val month = DateFormatSymbols().months[calendar.get(Calendar.MONTH) - 1]
-        current_date.text = "Сегодня $day $month"
+        current_date.setText("Сегодня $day $month")
     }
 }
