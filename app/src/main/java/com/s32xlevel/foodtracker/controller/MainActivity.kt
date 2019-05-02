@@ -39,7 +39,9 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
         changeFragment(SettingsFragment(), true)
     }
 
-
+    override fun changeFromSetting() {
+        changeFragment(WaterFragment(), true)
+    }
 
     // https://stackoverflow.com/questions/13086840/actionbar-up-navigation-with-fragments/40342939#40342939
     override fun onBackPressed() {

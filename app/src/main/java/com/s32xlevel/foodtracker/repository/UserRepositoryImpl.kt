@@ -16,15 +16,11 @@ class UserRepositoryImpl(private val context: Context): UserRepository {
     }
 
     override fun findById(id: Int): User? = context.database.use {
-        try {
-            select(DBHelper.UserTable.TABLE_NAME).whereSimple("id = $id").exec { parseOpt(classParser()) }
-        } catch (e: SQLiteException) {
-            null
-        }
+        select(DBHelper.UserTable.TABLE_NAME).whereSimple("_id = $id").exec { parseOpt(classParser()) }
     }
 
     override fun delete(id: Int): Unit = context.database.use {
-        delete(DBHelper.UserTable.TABLE_NAME, "id = $id")
+        delete(DBHelper.UserTable.TABLE_NAME, "_id = $id")
     }
 
     override fun save(user: User) {
