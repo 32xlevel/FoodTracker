@@ -8,8 +8,7 @@ import android.support.v7.widget.Toolbar
 import android.view.*
 import com.s32xlevel.foodtracker.R
 import kotlinx.android.synthetic.main.fragment_water.*
-import java.text.DateFormatSymbols
-import java.util.*
+import org.joda.time.DateTime
 
 class WaterFragment : Fragment() {
 
@@ -45,9 +44,7 @@ class WaterFragment : Fragment() {
     }
 
     private fun fillCurrentDate() {
-        val calendar = Calendar.getInstance()
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-        val month = DateFormatSymbols().months[calendar.get(Calendar.MONTH) - 1]
-        current_date.setText("Сегодня $day $month")
+        val dateTime = DateTime()
+        current_date.text = "Сегодня ${dateTime.dayOfMonth} ${dateTime.monthOfYear().asText}"
     }
 }

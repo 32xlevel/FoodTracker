@@ -10,7 +10,7 @@ class WaterRepositoryImpl(private val context: Context) : WaterRepository {
     private val Context.database: DBHelper
         get() = DBHelper.getInstance(context.applicationContext)
 
-    override fun findAllByDateTime(userId: Int, dateTime: Date): List<Water> = context.database.use {
+    override fun findAllByDateTime(userId: Int, dateTime: String): List<Water> = context.database.use {
         val waters = select(DBHelper.WaterTable.TABLE_NAME)
             .whereArgs("user_id = $userId AND date_time = $dateTime")
             .exec { parseList(classParser<Water>()) }
