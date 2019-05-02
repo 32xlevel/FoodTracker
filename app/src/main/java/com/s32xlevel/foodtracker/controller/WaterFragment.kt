@@ -7,26 +7,32 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.*
 import com.s32xlevel.foodtracker.AuthorizedUser
 import com.s32xlevel.foodtracker.R
+import com.s32xlevel.foodtracker.repository.UserRepository
+import com.s32xlevel.foodtracker.repository.UserRepositoryImpl
 import com.s32xlevel.foodtracker.repository.WaterRepository
 import com.s32xlevel.foodtracker.repository.WaterRepositoryImpl
 import com.s32xlevel.foodtracker.util.RecyclerWaterAdapter
 import kotlinx.android.synthetic.main.fragment_water.*
 import org.joda.time.DateTime
+import java.math.RoundingMode
+import java.text.DecimalFormat
+
 
 class WaterFragment : Fragment() {
 
     var listenerChange: ChangeFragment? = null
     private var waterRepository: WaterRepository? = null
+    private var userRepository: UserRepository? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         listenerChange = context as ChangeFragment
         waterRepository = WaterRepositoryImpl(context)
+        userRepository = UserRepositoryImpl(context)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,6 +47,8 @@ class WaterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fillCurrentDate()
         recyclerWork()
+        fillVolumes()
+        floatingActionButton()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -69,11 +77,11 @@ class WaterFragment : Fragment() {
                 val alert = AlertDialog.Builder(context!!)
                     .setTitle(getString(R.string.water_delete))
                     .setCancelable(true)
-                    .setPositiveButton(getString(R.string.dialog_yes)) { dialog, which ->
+                    .setPositiveButton(getString(com.s32xlevel.foodtracker.R.string.dialog_yes)) { dialog, which ->
                         waterRepository!!.delete(id = id, userId = AuthorizedUser.id)
                         recyclerAdapter.notifyDataSetChanged()
                     }
-                    .setNegativeButton(R.string.dialog_no) { dialog, which -> dialog.cancel() }
+                    .setNegativeButton(com.s32xlevel.foodtracker.R.string.dialog_no) { dialog, which -> dialog.cancel() }
                     .create()
 
                 alert.show()
@@ -83,5 +91,27 @@ class WaterFragment : Fragment() {
 
         water_recycler_view.adapter = recyclerAdapter
         water_recycler_view.addItemDecoration(DividerItemDecoration(context!!, layoutManager.orientation))
+    }
+
+    private fun floatingActionButton() {
+
+    }
+
+    private fun fillVolumes() {
+        val df = DecimalFormat("#.####")
+        df.roundingMode = RoundingMode.CEILING
+        val norma = df.format(userRepository?.findById(AuthorizedUser.id)?.rateWater)
+        your_norma.text = "${your_norma.text} $norma л"
+
+        val dateTime = DateTime().toLocalDate().toString() // yyyy-MM-dd
+        var volumeToday = 0.0 // мл
+        val waters = waterRepository!!.findAllByDateTime(AuthorizedUser.id, dateTime)
+        if (waters.isNotEmpty()) {
+            for (elem in waters) {
+                volumeToday += elem.volume!!
+            }
+        }
+        val volumeTodayDouble: Double = volumeToday / 1000
+        today_drink.text = "${today_drink.text} $volumeTodayDouble л"
     }
 }

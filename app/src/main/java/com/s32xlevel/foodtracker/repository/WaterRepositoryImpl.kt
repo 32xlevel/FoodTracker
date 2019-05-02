@@ -5,6 +5,7 @@ import com.s32xlevel.foodtracker.AuthorizedUser
 import com.s32xlevel.foodtracker.model.Water
 import org.jetbrains.anko.db.*
 import java.sql.Date
+import java.util.*
 
 class WaterRepositoryImpl(private val context: Context) : WaterRepository {
     private val Context.database: DBHelper
@@ -15,7 +16,11 @@ class WaterRepositoryImpl(private val context: Context) : WaterRepository {
             .whereArgs("user_id = $userId AND date_time = $dateTime")
             .exec { parseList(classParser<Water>()) }
 
-        waters
+        if (waters.isNotEmpty()) {
+            waters
+        } else {
+            Collections.emptyList()
+        }
     }
     override fun create(water: Water, userId: Int) {
         val db = context.database.writableDatabase
