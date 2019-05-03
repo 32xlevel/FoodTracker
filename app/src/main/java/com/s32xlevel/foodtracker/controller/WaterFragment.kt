@@ -94,7 +94,7 @@ class WaterFragment : Fragment() {
     }
 
     private fun floatingActionButton() {
-
+        FAB_Water.setOnClickListener { listenerChange!!.changeToAddWater() }
     }
 
     private fun fillVolumes() {

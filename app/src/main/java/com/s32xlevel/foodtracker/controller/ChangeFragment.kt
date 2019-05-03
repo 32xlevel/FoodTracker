@@ -4,4 +4,6 @@ interface ChangeFragment {
     fun changeToSettings()
 
     fun changeFromSetting()
+
+    fun changeToAddWater()
 }
