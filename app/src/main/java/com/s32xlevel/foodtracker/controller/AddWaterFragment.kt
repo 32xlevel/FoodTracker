@@ -24,6 +24,7 @@ class AddWaterFragment : Fragment() {
         val toolbar = rootView.findViewById<Toolbar>(R.id.toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.title = "Добавить воду"
         setHasOptionsMenu(true)
         return rootView
     }

@@ -25,4 +25,10 @@
     <string name="water_delete">Удалить прием?</string>
     <string name="dialog_yes">Да</string>
     <string name="dialog_no">Нет</string>
+    <string name="cup">Стакан (200 мл)</string>
+    <string name="mug">Кружка (300 мл)</string>
+    <string name="my_source">Своя ёмкость</string>
+    <string name="hint_volume">Объем (в мл)</string>
+    <string name="hint_source">Емкость</string>
+    <string name="button_add_water">Добавить</string>
 </resources>

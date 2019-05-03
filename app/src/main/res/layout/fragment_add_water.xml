@@ -11,4 +11,59 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbar_top"/>
 
+    <RadioGroup android:id="@+id/radio_group_add_water"
+                android:orientation="vertical"
+                android:layout_margin="16dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+        <RadioButton
+                android:id="@+id/radio_button_cup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/cup"/>
+
+        <RadioButton
+                android:id="@+id/radio_button_mug"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/mug"/>
+
+        <RadioButton
+                android:id="@+id/radio_button_mysource"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/my_source"/>
+
+        <EditText
+                android:id="@+id/water_my_source"
+                android:layout_marginStart="20dp"
+                android:layout_width="97dp"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="@string/hint_source"
+                android:visibility="invisible"/>
+
+        <EditText
+                android:id="@+id/water_my_volume"
+                android:layout_marginStart="20dp"
+                android:layout_width="97dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/hint_volume"
+                android:visibility="invisible"/>
+
+    </RadioGroup>
+
+    <Button
+            android:id="@+id/button_add_water"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/button_add_water"/>
+
 </LinearLayout>
