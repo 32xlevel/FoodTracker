@@ -11,9 +11,9 @@ class WaterRepositoryImpl(private val context: Context) : WaterRepository {
     private val Context.database: DBHelper
         get() = DBHelper.getInstance(context.applicationContext)
 
-    override fun findAllByDateTime(userId: Int, dateTime: String): List<Water> = context.database.use {
+    override fun findAllByDate(userId: Int, date: String): List<Water> = context.database.use {
         val waters = select(DBHelper.WaterTable.TABLE_NAME)
-            .whereArgs("user_id = $userId AND date_time = $dateTime")
+            .whereArgs("user_id = $userId AND date = $date")
             .exec { parseList(classParser<Water>()) }
 
         if (waters.isNotEmpty()) {
@@ -26,7 +26,8 @@ class WaterRepositoryImpl(private val context: Context) : WaterRepository {
         val db = context.database.writableDatabase
         if (userId == AuthorizedUser.id) {
             db.insert(DBHelper.WaterTable.TABLE_NAME,
-                DBHelper.WaterTable.DATE_TIME to water.dateTime,
+                DBHelper.WaterTable.DATE to water.date,
+                DBHelper.WaterTable.TIME to water.time,
                 DBHelper.WaterTable.volume to water.volume,
                 DBHelper.WaterTable.USER_ID to userId)
         }

@@ -73,19 +73,23 @@ class AddWaterFragment : Fragment() {
             when (button.id) {
                 radio_button_cup.id -> {
                     addWater("Стакан", 200)
+                    activity!!.onBackPressed()
                 }
                 radio_button_mug.id -> {
                     addWater("Кружка", 300)
+                    activity!!.onBackPressed()
                 }
                 radio_button_mysource.id -> {
                     addWater(fill_water_my_source.text.toString(), fill_water_my_volume.text.toString().toInt())
+                    activity!!.onBackPressed()
                 }
             }
         }
     }
 
     private fun addWater(source: String, volume: Int) {
-        val water = Water(id = null, dateTime = DateTime().toString("yyyy-MM-ddTHH:mm"),
+        val dateTime = DateTime()
+        val water = Water(id = null, date = dateTime.toLocalDate().toString(), time = dateTime.toLocalTime().toString("HH:mm"),
             volume = volume, source = source, userId = AuthorizedUser.id)
         waterRepository!!.create(water, AuthorizedUser.id)
     }

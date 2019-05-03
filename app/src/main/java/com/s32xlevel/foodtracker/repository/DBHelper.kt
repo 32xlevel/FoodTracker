@@ -40,7 +40,8 @@ class DBHelper(context: Context) : ManagedSQLiteOpenHelper(context,
     object WaterTable {
         const val TABLE_NAME = "water"
         const val ID = "_id"
-        const val DATE_TIME = "date_time" // YYYY-MM-DD HH:mm
+        const val DATE = "date" // YYYY-MM-DD
+        const val TIME = "time" // HH:mm
         const val volume = "volume"
         const val source = "source"
         const val USER_ID = "user_id"
@@ -68,7 +69,8 @@ class DBHelper(context: Context) : ManagedSQLiteOpenHelper(context,
         db.createTable(
             WaterTable.TABLE_NAME, true,
             WaterTable.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
-            WaterTable.DATE_TIME to TEXT + NOT_NULL,
+            WaterTable.DATE to TEXT + NOT_NULL,
+            WaterTable.TIME to TEXT + NOT_NULL,
             WaterTable.volume to INTEGER + NOT_NULL,
             WaterTable.source to TEXT + NOT_NULL,
             WaterTable.USER_ID to INTEGER + NOT_NULL,

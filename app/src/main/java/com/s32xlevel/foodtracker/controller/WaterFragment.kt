@@ -105,7 +105,7 @@ class WaterFragment : Fragment() {
 
         val dateTime = DateTime().toLocalDate().toString() // yyyy-MM-dd
         var volumeToday = 0.0 // мл
-        val waters = waterRepository!!.findAllByDateTime(AuthorizedUser.id, dateTime)
+        val waters = waterRepository!!.findAllByDate(AuthorizedUser.id, dateTime)
         if (waters.isNotEmpty()) {
             for (elem in waters) {
                 volumeToday += elem.volume!!
