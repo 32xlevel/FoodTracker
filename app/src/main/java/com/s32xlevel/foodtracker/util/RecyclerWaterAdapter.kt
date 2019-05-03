@@ -35,7 +35,7 @@ class RecyclerWaterAdapter(private val context: Context) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val waters = waterRepository.findAllByDateTime(AuthorizedUser.id, dateTime)
+        val waters = waterRepository.findAllByDate(AuthorizedUser.id, dateTime)
         val water = waters[position]
 
         viewHolder.id.text = water.id.toString()
@@ -46,6 +46,6 @@ class RecyclerWaterAdapter(private val context: Context) : RecyclerView.Adapter<
     }
 
     override fun getItemCount(): Int {
-        return waterRepository.findAllByDateTime(AuthorizedUser.id, dateTime).size
+        return waterRepository.findAllByDate(AuthorizedUser.id, dateTime).size
     }
 }
