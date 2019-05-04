@@ -41,7 +41,7 @@ class AddWaterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkMyButtonSource()
+        onClickRadioGroup()
         onClickButton()
     }
 
@@ -54,17 +54,6 @@ class AddWaterFragment : Fragment() {
             R.id.menu_settings -> listenerChange!!.changeToSettings()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun checkMyButtonSource() {
-        val button = view!!.findViewById<RadioButton>(radio_group_add_water.checkedRadioButtonId)
-        if (button.id == radio_button_mysource.id) {
-            fill_water_my_source.visibility = View.VISIBLE
-            fill_water_my_volume.visibility = View.VISIBLE
-        } else {
-            fill_water_my_source.visibility = View.INVISIBLE
-            fill_water_my_volume.visibility = View.INVISIBLE
-        }
     }
 
     private fun onClickButton() {
@@ -83,6 +72,25 @@ class AddWaterFragment : Fragment() {
                     addWater(fill_water_my_source.text.toString(), fill_water_my_volume.text.toString().toInt())
                     activity!!.onBackPressed()
                 }
+            }
+        }
+    }
+
+    private fun onClickRadioGroup() {
+        radio_button_mysource.setOnClickListener {
+            fill_water_my_source.visibility = View.VISIBLE
+            fill_water_my_volume.visibility = View.VISIBLE
+        }
+        radio_button_cup.setOnClickListener {
+            if (fill_water_my_source.visibility == View.VISIBLE) {
+                fill_water_my_source.visibility = View.INVISIBLE
+                fill_water_my_volume.visibility = View.INVISIBLE
+            }
+        }
+        radio_button_mug.setOnClickListener {
+            if (fill_water_my_source.visibility == View.VISIBLE) {
+                fill_water_my_source.visibility = View.INVISIBLE
+                fill_water_my_volume.visibility = View.INVISIBLE
             }
         }
     }

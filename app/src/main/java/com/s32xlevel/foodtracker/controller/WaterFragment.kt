@@ -80,6 +80,7 @@ class WaterFragment : Fragment() {
                     .setPositiveButton(getString(com.s32xlevel.foodtracker.R.string.dialog_yes)) { dialog, which ->
                         waterRepository!!.delete(id = id, userId = AuthorizedUser.id)
                         recyclerAdapter.notifyDataSetChanged()
+                        fillVolumes()
                     }
                     .setNegativeButton(com.s32xlevel.foodtracker.R.string.dialog_no) { dialog, which -> dialog.cancel() }
                     .create()
@@ -101,7 +102,7 @@ class WaterFragment : Fragment() {
         val df = DecimalFormat("#.####")
         df.roundingMode = RoundingMode.CEILING
         val norma = df.format(userRepository?.findById(AuthorizedUser.id)?.rateWater)
-        your_norma.text = "${your_norma.text} $norma л"
+        your_norma.text = "${getString(R.string.your_norma)} $norma л"
 
         val dateTime = DateTime().toLocalDate().toString() // yyyy-MM-dd
         var volumeToday = 0.0 // мл
@@ -112,6 +113,6 @@ class WaterFragment : Fragment() {
             }
         }
         val volumeTodayDouble: Double = volumeToday / 1000
-        today_drink.text = "${today_drink.text} $volumeTodayDouble л"
+        today_drink.text = "${getString(R.string.water_drink_today)} $volumeTodayDouble л"
     }
 }
