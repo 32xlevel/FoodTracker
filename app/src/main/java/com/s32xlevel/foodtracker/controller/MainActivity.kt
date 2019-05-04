@@ -1,5 +1,6 @@
 package com.s32xlevel.foodtracker.controller
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
             changeFragment(SettingsFragment() as Fragment, false)
         } else {
             changeFragment(FoodFragment() as Fragment, false)
+            activateNotifyService()
         }
 
         bottom_navigation.setOnNavigationItemSelectedListener {
@@ -72,4 +74,10 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
             transaction.addToBackStack(null)
         transaction.commit()
     }
+
+    private fun activateNotifyService() {
+        val intent = Intent(this, NotificationService::class.java)
+        startService(intent)
+    }
+
 }
