@@ -15,6 +15,7 @@ import net.danlew.android.joda.JodaTimeAndroid
 class MainActivity : AppCompatActivity(), ChangeFragment {
     private var userRepository: UserRepository? = null
 
+    // TODO: FIX NOTIFY SERVICE
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
