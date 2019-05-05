@@ -35,7 +35,8 @@ class NotificationService : IntentService("NotifyService") {
 
         //Click --> Activity TODO: intent.put(Fragment)
         val actionIntent = Intent(this, MainActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(this, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        actionIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        val pendingIntent = PendingIntent.getActivity(this, 0, actionIntent, PendingIntent.FLAG_NO_CREATE)
 
         builder = builder.setSmallIcon(R.drawable.cup300)
             .setContentTitle(getString(R.string.notify_water_title))
@@ -74,6 +75,7 @@ class NotificationService : IntentService("NotifyService") {
 
         //Click --> Activity TODO: intent.put(Fragment)
         val actionIntent = Intent(this, MainActivity::class.java)
+        actionIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         val pendingIntent = PendingIntent.getActivity(this, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         builder = builder.setSmallIcon(R.drawable.silverware)
