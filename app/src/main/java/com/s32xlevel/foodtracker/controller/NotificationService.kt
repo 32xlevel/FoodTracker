@@ -33,18 +33,16 @@ class NotificationService : IntentService("NotifyService") {
             builder = NotificationCompat.Builder(applicationContext)
         }
 
-        //Click --> Activity
+        //Click --> Activity TODO: intent.put(Fragment)
         val actionIntent = Intent(this, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        builder = builder.setSmallIcon(android.R.drawable.sym_def_app_icon)
+        builder = builder.setSmallIcon(R.drawable.cup300)
             .setContentTitle(getString(R.string.notify_water_title))
             .setDefaults(Notification.DEFAULT_ALL)
             .setAutoCancel(true)
             .addAction(R.drawable.cup300, "Отметить", pendingIntent)
-
-
-        builder.setContentIntent(pendingIntent)
+            .setContentIntent(pendingIntent)
 
         val user = userRepository!!.findById(1)!!
         val startTime = DateTimeFormat.forPattern("HH:mm:ss").parseDateTime(user.startDayTime).toLocalTime()
@@ -58,6 +56,35 @@ class NotificationService : IntentService("NotifyService") {
         if (isBetween(dateTime.toLocalTime(), startTime, endTime)) {
             notificationManager.notify(5453, builder.build())
         }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun showFoodNotify() {
+        val notificationManager =
+            applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        var builder: NotificationCompat.Builder?
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel("FoodId", "Food", NotificationManager.IMPORTANCE_DEFAULT)
+            notificationManager.createNotificationChannel(notificationChannel)
+            builder = NotificationCompat.Builder(applicationContext, notificationChannel.id)
+        } else {
+            builder = NotificationCompat.Builder(applicationContext)
+        }
+
+        //Click --> Activity TODO: intent.put(Fragment)
+        val actionIntent = Intent(this, MainActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(this, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        builder = builder.setSmallIcon(R.drawable.silverware)
+            .setContentTitle(getString(R.string.notify_water_title))
+            .setDefaults(Notification.DEFAULT_ALL)
+            .setAutoCancel(true)
+            .addAction(R.drawable.silverware, "Отметить", pendingIntent)
+            .setContentIntent(pendingIntent)
+
+        val alarmManager = applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+//        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, dateTime.millis, AlarmManager.INTERVAL_HOUR, pendingIntent)
     }
 
     private fun <T : Comparable<T>> isBetween(value: T, start: T?, end: T?): Boolean {
