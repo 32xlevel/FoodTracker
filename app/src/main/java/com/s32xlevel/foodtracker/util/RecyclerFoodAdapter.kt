@@ -1,18 +1,20 @@
 package com.s32xlevel.foodtracker.util
 
 import android.content.Context
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.s32xlevel.foodtracker.R
 import com.s32xlevel.foodtracker.repository.UserRepositoryImpl
 
 class RecyclerFoodAdapter(val context: Context) : RecyclerView.Adapter<RecyclerFoodAdapter.ViewHolder>() {
 
     interface Listener {
-        fun onClick()
+        fun onClick(position: Int): Boolean?
     }
 
     var listener: Listener? = null
@@ -39,7 +41,20 @@ class RecyclerFoodAdapter(val context: Context) : RecyclerView.Adapter<RecyclerF
         viewHolder.typeName.text = dish.typeName
         viewHolder.time.text = time
 
-        viewHolder.itemView.setOnClickListener { listener!!.onClick() }
+        viewHolder.itemView.setOnClickListener {
+            val bol = listener!!.onClick(position)
+            if (bol != null) {
+                if (bol) {
+                    viewHolder.typeName.setTextColor(Color.RED)
+                    viewHolder.time.setTextColor(Color.RED)
+                } else {
+                    viewHolder.typeName.setTextColor(Color.GREEN)
+                    viewHolder.time.setTextColor(Color.GREEN)
+                }
+            } else {
+                Toast.makeText(context, context.getString(R.string.time_no_come), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun getItemCount(): Int {

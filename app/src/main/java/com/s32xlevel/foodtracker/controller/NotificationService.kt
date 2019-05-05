@@ -7,6 +7,7 @@ import android.support.v4.app.NotificationCompat
 import com.s32xlevel.foodtracker.R
 import com.s32xlevel.foodtracker.repository.UserRepository
 import com.s32xlevel.foodtracker.repository.UserRepositoryImpl
+import com.s32xlevel.foodtracker.util.TimeUtil
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 
@@ -54,12 +55,12 @@ class NotificationService : IntentService("NotifyService") {
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, dateTime.millis, AlarmManager.INTERVAL_HOUR, pendingIntent)
 
 
-        if (isBetween(dateTime.toLocalTime(), startTime, endTime)) {
+        if (TimeUtil.isBetween(dateTime.toLocalTime(), startTime, endTime)) {
             notificationManager.notify(5453, builder.build())
         }
     }
 
-    @Suppress("DEPRECATION")
+    /*@Suppress("DEPRECATION")
     private fun showFoodNotify() {
         val notificationManager =
             applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -78,18 +79,14 @@ class NotificationService : IntentService("NotifyService") {
         actionIntent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         val pendingIntent = PendingIntent.getActivity(this, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        builder = builder.setSmallIcon(R.drawable.silverware)
+*//*        builder = builder.setSmallIcon(R.drawable.silverware)
             .setContentTitle(getString(R.string.notify_water_title))
             .setDefaults(Notification.DEFAULT_ALL)
             .setAutoCancel(true)
             .addAction(R.drawable.silverware, "Отметить", pendingIntent)
-            .setContentIntent(pendingIntent)
+            .setContentIntent(pendingIntent)*//*
 
-        val alarmManager = applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+//        val alarmManager = applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 //        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, dateTime.millis, AlarmManager.INTERVAL_HOUR, pendingIntent)
-    }
-
-    private fun <T : Comparable<T>> isBetween(value: T, start: T?, end: T?): Boolean {
-        return (start == null || value >= start) && (end == null || value <= end)
-    }
+    }*/
 }

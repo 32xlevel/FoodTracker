@@ -32,4 +32,6 @@
     <string name="hint_source">Емкость</string>
     <string name="button_add_water">Добавить</string>
     <string name="notify_water_title">Выпейте воду</string>
+    <string name="time_no_come">Время еще не пришло</string>
+    <string name="click_food">Нажмите на прием пищи, чтобы отметить его</string>
 </resources>

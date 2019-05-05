@@ -16,8 +16,8 @@ class TimeUtil {
             return "${split[0]}:${split[1]}:${split[2]}"
         }
 
-        fun isBetween(): Boolean {
-            return true
+        fun <T : Comparable<T>> isBetween(value: T, start: T?, end: T?): Boolean {
+            return (start == null || value >= start) && (end == null || value <= end)
         }
 
         fun convertStringTimeToDateTime(time: String): DateTime = DateTimeFormat.forPattern("HH:mm:ss").parseDateTime(time)
