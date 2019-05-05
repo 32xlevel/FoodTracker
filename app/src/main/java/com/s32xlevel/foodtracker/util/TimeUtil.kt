@@ -1,5 +1,8 @@
 package com.s32xlevel.foodtracker.util
 
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
+
 class TimeUtil {
     companion object {
         fun convertTimeString(s: String): String {
@@ -16,5 +19,7 @@ class TimeUtil {
         fun isBetween(): Boolean {
             return true
         }
+
+        fun convertStringTimeToDateTime(time: String): DateTime = DateTimeFormat.forPattern("HH:mm:ss").parseDateTime(time)
     }
 }
