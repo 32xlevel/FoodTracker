@@ -10,4 +10,17 @@
     <include
             layout="@layout/toolbar_top"
             android:id="@+id/toolbar"/>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/food_recycler_id"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/FAB_Food"
+            android:layout_gravity="bottom|end"
+            android:src="@android:drawable/ic_dialog_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 </LinearLayout>
