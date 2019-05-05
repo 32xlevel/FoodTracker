@@ -37,7 +37,7 @@ class RecyclerFoodAdapter(val context: Context) : RecyclerView.Adapter<RecyclerF
         val time = "${dish.timeReception!!.toLocalTime().toString("HH:mm")} - ${addedTime.toLocalTime().toString("HH:mm")}"
 
         viewHolder.typeName.text = dish.typeName
-        viewHolder.typeName.text = time
+        viewHolder.time.text = time
 
         viewHolder.itemView.setOnClickListener { listener!!.onClick() }
     }

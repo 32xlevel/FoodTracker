@@ -64,7 +64,7 @@ class WaterFragment : Fragment() {
 
     private fun fillCurrentDate() {
         val dateTime = DateTime()
-        current_date.text = "Сегодня ${dateTime.dayOfMonth} ${dateTime.monthOfYear().asText}"
+        current_date.text = "${dateTime.dayOfMonth} ${dateTime.monthOfYear().asText}"
     }
 
     private fun recyclerWork() {
