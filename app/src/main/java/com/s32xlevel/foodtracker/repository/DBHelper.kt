@@ -49,7 +49,7 @@ class DBHelper(context: Context) : ManagedSQLiteOpenHelper(
     }
 
     object FoodTable {
-        const val TABLE_NAME = "food"
+        const val TABLE_NAME = "foods"
         const val ID = "_id"
         const val DATE = "date"
         const val TYPE_ID = "food_type_id"

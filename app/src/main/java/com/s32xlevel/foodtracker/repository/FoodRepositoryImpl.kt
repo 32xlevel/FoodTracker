@@ -4,12 +4,14 @@ import android.content.Context
 import com.s32xlevel.foodtracker.AuthorizedUser
 import com.s32xlevel.foodtracker.model.Food
 import org.jetbrains.anko.db.*
+import java.util.*
 
 class FoodRepositoryImpl(private val context: Context) : FoodRepository {
 
     private val Context.database: DBHelper
         get() = DBHelper.getInstance(context.applicationContext)
 
+    // unique date + typeId
     override fun save(food: Food, userId: Int) {
         val db = context.database.writableDatabase
         if (userId == AuthorizedUser.id && food.id == null) {
@@ -24,8 +26,9 @@ class FoodRepositoryImpl(private val context: Context) : FoodRepository {
 
     override fun findAll(userId: Int, date: String): List<Food> = context.database.use {
 //        val foodsDate = mutableListOf<Food>()
-        select(DBHelper.FoodTable.TABLE_NAME)
-            .whereArgs("${DBHelper.FoodTable.DATE} = $date AND ${DBHelper.FoodTable.USER_ID} = $userId")
+        val foodsDate = select(DBHelper.FoodTable.TABLE_NAME)
+            .whereArgs("${DBHelper.FoodTable.DATE} = {date} AND ${DBHelper.FoodTable.USER_ID} = {userId}",
+                "date" to date, "userId" to userId)
             .exec {
                 /*parseList(object : MapRowParser<List<Food>> {
                     override fun parseRow(columns: Map<String, Any?>): List<Food> {
@@ -38,9 +41,12 @@ class FoodRepositoryImpl(private val context: Context) : FoodRepository {
                         return foodsDate
                     }
                 })*/
-                parseList(classParser())
+                parseList(classParser<Food>())
             }
-//        foodsDate
+        if (foodsDate.isNullOrEmpty()) {
+            Collections.emptyList<Food>()
+        }
+        foodsDate
     }
 
     override fun findByTypeId(typeId: Int, date: String): Food? = context.database.use {
