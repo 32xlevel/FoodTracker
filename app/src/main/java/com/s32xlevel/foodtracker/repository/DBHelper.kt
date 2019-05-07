@@ -4,7 +4,8 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import org.jetbrains.anko.db.*
 
-class DBHelper(context: Context) : ManagedSQLiteOpenHelper(context,
+class DBHelper(context: Context) : ManagedSQLiteOpenHelper(
+    context,
     DB_NAME, null,
     DB_VERSION
 ) {
@@ -48,7 +49,11 @@ class DBHelper(context: Context) : ManagedSQLiteOpenHelper(context,
     }
 
     object FoodTable {
-        ////
+        const val TABLE_NAME = "food"
+        const val ID = "_id"
+        const val DATE = "date"
+        const val TYPE_ID = "food_type_id"
+        const val USER_ID = "user_id"
     }
 
     // dates: https://github.com/Kotlin/anko/issues/597#issuecomment-377873925
@@ -77,7 +82,22 @@ class DBHelper(context: Context) : ManagedSQLiteOpenHelper(context,
             FOREIGN_KEY(
                 WaterTable.USER_ID,
                 UserTable.TABLE_NAME,
-                UserTable.ID, ON_DELETE(ConstraintActions.CASCADE)))
+                UserTable.ID, ON_DELETE(ConstraintActions.CASCADE)
+            )
+        )
+
+        // TODO: TypesFood table add
+        db.createTable(
+            FoodTable.TABLE_NAME, true,
+            FoodTable.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+            FoodTable.DATE to TEXT + NOT_NULL,
+            FoodTable.TYPE_ID to INTEGER,
+            FoodTable.USER_ID to INTEGER + NOT_NULL, FOREIGN_KEY(
+                FoodTable.USER_ID,
+                UserTable.TABLE_NAME,
+                UserTable.ID, ON_DELETE(ConstraintActions.CASCADE)
+            )
+        )
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

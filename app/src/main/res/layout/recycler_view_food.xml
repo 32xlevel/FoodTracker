@@ -23,4 +23,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+    <CheckBox
+            android:id="@+id/food_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"/>
+
+    <!-- true - RED, false - GREEN -->
+    <CheckBox
+            android:id="@+id/food_check_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"/>
+
 </LinearLayout>

@@ -1,7 +1,11 @@
 package com.s32xlevel.foodtracker.repository
 
-interface FoodRepository {
-    /*fun findAll(userId: Int, dateTime: LocalDateTime)
+import com.s32xlevel.foodtracker.model.Food
 
-    fun create(food: Food)*/
+interface FoodRepository {
+    fun findAll(userId: Int, date: String): List<Food>
+
+    fun save(food: Food, userId: Int)
+
+    fun findByTypeId(typeId: Int, date: String): Food?
 }

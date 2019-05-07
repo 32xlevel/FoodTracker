@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import com.s32xlevel.foodtracker.R
@@ -24,6 +25,8 @@ class RecyclerFoodAdapter(val context: Context) : RecyclerView.Adapter<RecyclerF
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var typeName = itemView.findViewById<TextView>(R.id.food_recycler_typeName)
         var time = itemView.findViewById<TextView>(R.id.food_recycler_time)
+        var check = itemView.findViewById<CheckBox>(R.id.food_check)
+        var checkTime = itemView.findViewById<CheckBox>(R.id.food_check_time)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
@@ -40,17 +43,24 @@ class RecyclerFoodAdapter(val context: Context) : RecyclerView.Adapter<RecyclerF
 
         viewHolder.typeName.text = dish.typeName
         viewHolder.time.text = time
+        viewHolder.check.isChecked = true
+
+        if (viewHolder.check.isChecked) {
+            if (viewHolder.checkTime.isChecked) {
+                viewHolder.typeName.setTextColor(Color.RED)
+                viewHolder.time.setTextColor(Color.RED)
+            } else {
+                viewHolder.typeName.setTextColor(Color.GREEN)
+                viewHolder.time.setTextColor(Color.GREEN)
+            }
+        }
 
         viewHolder.itemView.setOnClickListener {
             val bol = listener!!.onClick(position)
             if (bol != null) {
-                if (bol) {
-                    viewHolder.typeName.setTextColor(Color.RED)
-                    viewHolder.time.setTextColor(Color.RED)
-                } else {
-                    viewHolder.typeName.setTextColor(Color.GREEN)
-                    viewHolder.time.setTextColor(Color.GREEN)
-                }
+                viewHolder.checkTime.isChecked = bol
+                viewHolder.check.isChecked = true
+                notifyDataSetChanged()
             } else {
                 Toast.makeText(context, context.getString(R.string.time_no_come), Toast.LENGTH_SHORT).show()
             }
