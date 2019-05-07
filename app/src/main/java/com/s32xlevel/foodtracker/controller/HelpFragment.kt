@@ -12,6 +12,9 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.*
 import com.s32xlevel.foodtracker.R
+import com.s32xlevel.foodtracker.repository.UserRepository
+import com.s32xlevel.foodtracker.repository.UserRepositoryImpl
+import com.s32xlevel.foodtracker.util.FoodUtil
 import kotlinx.android.synthetic.main.fragment_help.*
 import org.joda.time.DateTime
 
@@ -19,10 +22,12 @@ import org.joda.time.DateTime
 class HelpFragment : Fragment() {
 
     var listenerChange: ChangeFragment? = null
+    var userRepository: UserRepository? = null
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         listenerChange = context as ChangeFragment
+        userRepository = UserRepositoryImpl(context)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -57,7 +62,18 @@ class HelpFragment : Fragment() {
     }
 
     private fun activateNotifyFoodService() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val intent = Intent(activity!!, NotificationReceiverFood::class.java)
+        val alarmManager = activity!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val foods = FoodUtil.getFoodsForUser(userRepository!!.findById(1)!!)
+        for (i in foods!!.indices) {
+            val time = foods[i].timeReception
+            val pendingIntent = PendingIntent.getBroadcast(activity!!, i, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            alarmManager.setInexactRepeating(
+                AlarmManager.RTC_WAKEUP,
+                time!!.millis,
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent)
+        }
     }
 
     private fun activateNotifyWaterService() {
