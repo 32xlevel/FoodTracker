@@ -1,9 +1,11 @@
 package com.s32xlevel.foodtracker.controller
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.view.View
 import com.s32xlevel.foodtracker.R
@@ -15,7 +17,6 @@ import net.danlew.android.joda.JodaTimeAndroid
 class MainActivity : AppCompatActivity(), ChangeFragment {
     private var userRepository: UserRepository? = null
 
-    // TODO: FIX NOTIFY SERVICE
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,8 +27,15 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
             bottom_navigation.visibility = View.INVISIBLE
             changeFragment(SettingsFragment() as Fragment, false)
         } else {
-            changeFragment(FoodFragment() as Fragment, false)
-            activateNotifyService()
+            if (getIntent() == null) {
+                changeFragment(FoodFragment() as Fragment, false)
+            } else {
+                if (intent.getStringExtra("FRAGMENT") == "Water") {
+                    changeFragment(AddWaterFragment() as Fragment, true)
+                } else {
+                    changeFragment(FoodFragment() as Fragment, false)
+                }
+            }
         }
 
         bottom_navigation.setOnNavigationItemSelectedListener {
@@ -74,11 +82,6 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
         if (isAddToBackStack)
             transaction.addToBackStack(null)
         transaction.commit()
-    }
-
-    private fun activateNotifyService() {
-        val intent = Intent(this, NotificationService::class.java)
-        startService(intent)
     }
 
 }
