@@ -17,6 +17,10 @@ import org.joda.time.DateTime
 
 class RecyclerFoodAdapter(val context: Context) : RecyclerView.Adapter<RecyclerFoodAdapter.ViewHolder>() {
 
+    companion object {
+        private val map = mutableMapOf<Int, Boolean>()
+    }
+
     interface Listener {
         fun onClick(position: Int): Boolean?
     }
@@ -54,12 +58,16 @@ class RecyclerFoodAdapter(val context: Context) : RecyclerView.Adapter<RecyclerF
         viewHolder.time.text = time
 
         viewHolder.check.isChecked = !(foods.isEmpty() || !checkTypeInFoods(foods, viewHolder.typeFoodId.text.toString().toInt()))
+        if (map[position] != null) {
+            viewHolder.checkTime.isChecked = map[position]!!
+        }
 
         if (viewHolder.check.isChecked) {
             if (viewHolder.checkTime.isChecked) {
                 viewHolder.typeName.setTextColor(Color.RED)
                 viewHolder.time.setTextColor(Color.RED)
-            } else {
+            }
+            if (!viewHolder.checkTime.isChecked) {
                 viewHolder.typeName.setTextColor(Color.GREEN)
                 viewHolder.time.setTextColor(Color.GREEN)
             }
@@ -69,7 +77,7 @@ class RecyclerFoodAdapter(val context: Context) : RecyclerView.Adapter<RecyclerF
             val bol = listener!!.onClick(position)
             if (bol != null) {
                 if (!checkTypeInFoods(foods, viewHolder.typeFoodId.text.toString().toInt())) {
-                    viewHolder.checkTime.isChecked = bol
+                    map[position] = bol
                     foodRepository.save(Food(null, date, viewHolder.typeFoodId.text.toString().toInt(), 1), 1)
                     notifyDataSetChanged()
                 } else {
