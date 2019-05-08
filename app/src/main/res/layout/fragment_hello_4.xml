@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="16dp"
+              tools:context=".controller.hello.HelloFragment4">
+
+    <TextView
+            android:text="Введите данные о вашем режиме дня"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/settings_start_time"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        <EditText
+                android:id="@+id/fillEd_start_date_time"
+                android:layout_width="148dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"/>
+    </LinearLayout>
+
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/settings_end_time"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        <EditText
+                android:id="@+id/fillEd_end_date_time"
+                android:layout_width="148dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"/>
+    </LinearLayout>
+
+    <TextView
+            android:text="Сколько раз в день вы планируете питаться?"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    <RadioGroup
+            android:layout_marginStart="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/helloEd_count"
+            android:orientation="horizontal">
+
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radio_button_4"
+                android:checked="true"
+                android:text="4"/>
+
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radio_button_5"
+                android:checked="false"
+                android:text="5"/>
+
+    </RadioGroup>
+
+    <Button
+            android:id="@+id/hello_next4"
+            android:text="Продолжить"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="16dp"
+              tools:context=".controller.hello.HelloFragment2">
+
+    <TextView
+            android:text="Для начала представьтесь"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+
+    <EditText
+            android:id="@+id/helloEd_name"
+            android:hint="Ваше имя"
+            android:inputType="text"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"/>
+
+    <RadioGroup
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/helloEd_gender"
+            android:orientation="horizontal">
+
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radio_button_male"
+                android:checked="true"
+                android:text="@string/Male"/>
+
+        <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/radio_button_female"
+                android:checked="false"
+                android:text="@string/Female"/>
+
+    </RadioGroup>
+
+    <Button
+            android:id="@+id/hello_next2"
+            android:text="Продолжить"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

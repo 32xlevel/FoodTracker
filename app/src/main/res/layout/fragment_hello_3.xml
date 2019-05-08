@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:padding="16dp"
+              tools:context=".controller.hello.HelloFragment3">
+
+    <TextView
+            android:text="Введите данные о своем здоровье"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+
+    <EditText
+            android:id="@+id/helloEd_weight"
+            android:hint="Ваш вес (в кг)"
+            android:inputType="number"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"/>
+
+    <EditText
+            android:id="@+id/helloEd_height"
+            android:hint="Ваш рост (в см)"
+            android:inputType="number"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="149dp"
+            android:layout_height="wrap_content"/>
+
+    <Button
+            android:id="@+id/hello_next3"
+            android:text="Продолжить"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

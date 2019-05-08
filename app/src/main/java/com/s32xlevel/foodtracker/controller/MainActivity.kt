@@ -25,13 +25,13 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
 
         if (userRepository!!.findById(1) == null) {
             bottom_navigation.visibility = View.INVISIBLE
-            changeFragment(SettingsFragment() as Fragment, false)
+            changeFragment(HelloFragment() as Fragment, false)
         } else {
             if (getIntent() == null) {
                 changeFragment(FoodFragment() as Fragment, false)
             } else {
                 if (intent.getStringExtra("FRAGMENT") == "Water") {
-                    changeFragment(AddWaterFragment() as Fragment, true)
+                    changeFragment(AddWaterFragment() as Fragment, false)
                 } else {
                     changeFragment(FoodFragment() as Fragment, false)
                 }
