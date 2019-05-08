@@ -27,14 +27,16 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 
 class HelloFragment : Fragment() {
 
-    var userRepository: UserRepository? = null
-    var name: String? = null
-    var gender: String? = null
-    var weight: Int? = null
-    var height: Int? = null
-    var startTime: String? = null
-    var endTime: String? = null
-    var foodCount: Byte? = null
+    companion object {
+        var userRepository: UserRepository? = null
+        var name: String? = null
+        var gender: String? = null
+        var weight: Int? = null
+        var height: Int? = null
+        var startTime: String? = null
+        var endTime: String? = null
+        var foodCount: Byte? = null
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         userRepository = UserRepositoryImpl(context!!)

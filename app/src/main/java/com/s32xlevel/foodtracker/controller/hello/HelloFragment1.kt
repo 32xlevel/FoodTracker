@@ -19,9 +19,9 @@ class HelloFragment1 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*hello_next1.setOnClickListener {
+        hello_next1.setOnClickListener {
             changeFragment(HelloFragment2(), true)
-        }*/
+        }
     }
 
     private fun changeFragment(fragment: Fragment, isAddToBackStack: Boolean) {
