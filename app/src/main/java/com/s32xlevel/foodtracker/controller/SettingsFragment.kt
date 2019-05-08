@@ -40,8 +40,6 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         userRepository = UserRepositoryImpl(context!!)
         val rootView = inflater.inflate(R.layout.fragment_settings, container, false)
-        val toolbar = rootView.findViewById<Toolbar>(R.id.toolbar)
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
         if (userRepository!!.findById(1) != null) {
             (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
             (activity as AppCompatActivity).supportActionBar?.title = "Настройки"
@@ -83,7 +81,7 @@ class SettingsFragment : Fragment() {
             val height = fill_height.text.toString().toInt()
             val startTime = fill_start_date_time.text.toString()
             val endTime = fill_end_date_time.text.toString()
-            val foodCount = fill_food_count.text.toString().toByte()
+            val foodCount = activity!!.findViewById<RadioButton>(fill_food_count.checkedRadioButtonId).text.toString().toByte()
             val rateWater = 0.03 * weight
 
             val user = User(id = null, name = name, gender = gender,
@@ -120,7 +118,6 @@ class SettingsFragment : Fragment() {
             fill_height.setText(user.height.toString())
             fill_start_date_time.setText(user.startDayTime)
             fill_end_date_time.setText(user.endDayTime)
-            fill_food_count.setText(user.foodNumber.toString())
         }
     }
 }

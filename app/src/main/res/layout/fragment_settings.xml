@@ -12,10 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <include
-                layout="@layout/toolbar_top"
-                android:id="@+id/toolbar"/>
-
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -135,26 +131,39 @@
                     android:layout_margin="16dp"/>
         </LinearLayout>
 
-        <LinearLayout android:orientation="vertical" android:layout_width="match_parent"
-                      android:layout_height="wrap_content">
-            <TextView
+        <TextView
+                android:text="Сколько раз в день вы планируете питаться?"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:padding="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <RadioGroup
+                android:layout_marginStart="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fill_food_count"
+                android:orientation="horizontal">
+
+            <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:text="@string/settings_food_count"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
-            <EditText
-                    android:id="@+id/fill_food_count"
-                    android:layout_width="177dp"
+                    android:id="@+id/radio_button_4"
+                    android:checked="true"
+                    android:text="4"/>
+
+            <RadioButton
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:inputType="number"/>
-        </LinearLayout>
+                    android:id="@+id/radio_button_5"
+                    android:checked="false"
+                    android:text="5"/>
+
+        </RadioGroup>
 
         <Button
                 android:id="@+id/button_start"
+                android:text="Сохранить"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

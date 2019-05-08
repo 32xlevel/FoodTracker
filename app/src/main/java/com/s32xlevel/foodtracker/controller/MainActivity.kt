@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), ChangeFragment {
 
         if (userRepository!!.findById(1) == null) {
             bottom_navigation.visibility = View.INVISIBLE
-            changeFragment(HelloFragment() as Fragment, false)
+            changeFragment(SettingsFragment() as Fragment, false)
         } else {
             if (getIntent() == null) {
                 changeFragment(FoodFragment() as Fragment, false)

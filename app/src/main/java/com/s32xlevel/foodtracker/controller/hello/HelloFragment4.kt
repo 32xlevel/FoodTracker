@@ -27,7 +27,7 @@ class HelloFragment4 : Fragment() {
         hello_next4.setOnClickListener {
             HelloFragment.startTime = fillEd_start_date_time.text.toString()
             HelloFragment.endTime = fillEd_end_date_time.text.toString()
-            HelloFragment.foodCount = view.findViewById<RadioButton>(helloEd_count.checkedRadioButtonId).text.toString().toByte()
+//            HelloFragment.foodCount = view.findViewById<RadioButton>(helloEd_count.checkedRadioButtonId).text.toString().toByte()
             changeFragment(HelloFragment5(), true)
         }
     }
