@@ -61,8 +61,9 @@ class HelpFragment : Fragment() {
         }
     }
 
+    // TODO: FIX
     private fun activateNotifyFoodService() {
-        val intent = Intent(activity!!, NotificationReceiverFood::class.java)
+        /*val intent = Intent(activity!!, NotificationReceiverFood::class.java)
         val alarmManager = activity!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val foods = FoodUtil.getFoodsForUser(userRepository!!.findById(1)!!)
         for (i in foods!!.indices) {
@@ -73,17 +74,16 @@ class HelpFragment : Fragment() {
                 time!!.millis,
                 AlarmManager.INTERVAL_DAY,
                 pendingIntent)
-        }
+        }*/
     }
 
     private fun activateNotifyWaterService() {
-        val dateTime = DateTime()
         val intent = Intent(activity!!, NotificationReceiverWater::class.java)
         val pendingIntent = PendingIntent.getBroadcast(activity!!, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         val alarmManager = activity!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.setInexactRepeating(
             AlarmManager.RTC_WAKEUP,
-            dateTime.millis,
+            System.currentTimeMillis(),
             AlarmManager.INTERVAL_HOUR,
             pendingIntent
         )
